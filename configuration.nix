@@ -6,12 +6,11 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
       ./hardware-configuration.nix
       ./zsh.nix
       ./mounts.nix
-      ./nginx.nix
-      ./docker.nix
+      ./nginx/nginx.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -59,13 +58,13 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.extraUsers.luka.extraGroups = ["podman"];
   users.users.luka = {
   	isNormalUser = true;
 	home = "/home/luka";
 	shell = pkgs.zsh;
-  	extraGroups = [ "wheel" "www" "networkmanager" "www-data" "nginx" "sshd" "users" ]; # Enable ‘sudo’ for the user.
+  	extraGroups = [ "wheel" "networkmanager" "nginx" "sshd" "users" ]; # Enable ‘sudo’ for the user.
   	packages = with pkgs; [
   		fastfetch	
   		zsh	
@@ -87,7 +86,16 @@
 	nginx
 	bsd-finger
 	openssl
+	arion
+	docker-client
+	dig
+	inetutils
   ];
+
+  virtualisation.docker.enable = false;
+  virtualisation.podman.enable = true;
+  virtualisation.podman.dockerSocket.enable = true;
+  virtualisation.podman.defaultNetwork.settings.dns_enabled = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -105,7 +113,7 @@
   services.openssh.enable = true;
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 80 443 21 22 23 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 21 22 23 5006 ];
   networking.firewall.allowedUDPPorts = [ 20 22 ];
   # Or disable the firewall altogether.
   networking.firewall.enable = true;

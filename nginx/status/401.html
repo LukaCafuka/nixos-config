@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>401 Authorization Required</title>
+		<style>
+			body {
+				font-family: 'Trebuchet MS', sans-serif;
+				background-color: #030712;
+				box-sizing: border-box;
+				color: white;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				flex-direction: column;
+				height: 100vh;
+				justify-content: center;
+				align-items: center;
+				position: relative;
+			}
+			a {
+				color: grey;
+				text-decoration: underline;
+			}
+			.container {
+				display: flex;
+				margin: 2rem 0;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+			}
+			main {
+				text-align: center;
+			}
+			h1, h2, h3, h4, h5, h6, p {
+				margin: 0;
+			}
+			footer {
+				position: absolute;
+				bottom: 0;
+				margin: 2rem 0;
+				text-align: center;
+			}
+			.info {
+				display: flex;
+				justify-content: space-around;
+			}
+			.webserver {
+				padding: 2px 0 0 0;
+				position: relative;
+			}
+			.status {
+				position: relative;
+				padding: 0 0 15px 0;
+			}
+			.status::before {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 25%;
+				right: 0;
+				width: 50%;
+				background-color: white;
+				height: 2px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<main>
+				<h1>Authorization required - Nužna autorizacija</h1>
+				<h3 class="status">Status: 401</h3>
+				<p class="webserver">nginx</p>
+			</main>
+			<footer>
+				<section class="info">
+					<p>Info: <a href="http://z.com.hr">z.com.hr</a></p>
+					<p>Contact: <a href="mailto:luka@z.com.hr">luka@z.com.hr</a></p>
+				</section>
+				<p>This page is in the ownership of mnogodobar.net and z.com.hr. For more info, check above...</p>
+			</footer>
+		</div>
+	</body>
+</html>
